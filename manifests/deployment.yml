@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: eureka-discovery-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: eureka-discovery-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: eureka-discovery-service
+        app: eureka-discovery-service
+    spec:
+      containers:
+        - name: eureka-discovery-service
+          image: docker.io/digilinq/eureka-discovery-service
+          envFrom:
+            - configMapRef:
+                name: eureka-discovery-service
+          ports:
+            - containerPort: 8761
+              name: service
+            - containerPort: 8081
+              name: management
