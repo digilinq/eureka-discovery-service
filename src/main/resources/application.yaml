@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: eureka-discovery-service
+server:
+  port: 8761
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+---
+spring:
+  config:
+    activate:
+      on-profile: prod
