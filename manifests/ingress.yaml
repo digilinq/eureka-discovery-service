@@ -6,7 +6,7 @@ metadata:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-  - host: eureka.digilinq.org
+  - host: eureka.lazycomputing.org
     http:
       paths:
       - path: /
