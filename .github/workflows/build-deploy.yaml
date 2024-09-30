@@ -72,7 +72,9 @@ jobs:
       image: ${{ needs.create-docker-image.outputs.docker-image }}
       namespace: ${{ fromJSON(needs.config.outputs.deployment).namespace }}
       manifests: |
-        'manifests/ingress.yaml'
+        manifests/deployment.yaml
+        manifests/service.yaml
+        manifests/ingress.yaml
     secrets:
       kubernetes-url: ${{ secrets.KUBERNETES_URL }}
       kubernetes-secret: ${{ secrets.KUBERNETES_SECRET }}
