@@ -14,7 +14,7 @@ env:
 
 jobs:
   config:
-    uses: digilinq/reusable-workflows/.github/workflows/project-configuration.yaml@v5.0.4
+    uses: digilinq/reusable-workflows/.github/workflows/project-configuration.yaml@v5.0.5
 
   eval:
     needs: config
@@ -28,7 +28,7 @@ jobs:
     name: build
     needs:
       - config
-    uses: digilinq/reusable-workflows/.github/workflows/build-maven-project.yaml@v5.0.4
+    uses: digilinq/reusable-workflows/.github/workflows/build-maven-project.yaml@v5.0.5
     with:
       runner: ${{ needs.config.outputs.github-runner }}
       ref: ${{ github.ref }}
@@ -40,7 +40,7 @@ jobs:
 
   docker-container-registry:
     name: image-specifications
-    uses: digilinq/reusable-workflows/.github/workflows/docker-image-specifications.yaml@v5.0.4
+    uses: digilinq/reusable-workflows/.github/workflows/docker-image-specifications.yaml@v5.0.5
     with:
       registry: ${{ vars.CONTAINER_REGISTRY }}
       namespace: ${{ vars.DOCKER_HUB_USERNAME }}
@@ -52,7 +52,7 @@ jobs:
       - config
       - build
       - docker-container-registry
-    uses: digilinq/reusable-workflows/.github/workflows/create-docker-image.yaml@v5.0.4
+    uses: digilinq/reusable-workflows/.github/workflows/create-docker-image.yaml@v5.0.5
     with:
       runner: 'ubuntu-latest'
       artifact-name: 'Package'
@@ -65,7 +65,7 @@ jobs:
     needs:
       - config
       - create-docker-image
-    uses: digilinq/reusable-workflows/.github/workflows/kubernetes-deploy.yaml@v5.0.4
+    uses: digilinq/reusable-workflows/.github/workflows/kubernetes-deploy.yaml@v5.0.5
     with:
       runner: 'ubuntu-latest'
       ref: ${{ github.ref }}
